@@ -1,2 +1,10 @@
-package PACKAGE_NAME;public class LottoGameTest {
+import org.junit.Test;
+
+public class LottoGameTest {
+
+    @Test
+    public void testNewLottoGame() {
+        LottoGame lottoGame = LottoGame.newLottoGame();
+        lottoGame.run();
+    }
 }
