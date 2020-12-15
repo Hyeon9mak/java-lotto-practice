@@ -1,3 +1,5 @@
+package lotto;
+
 public class LottoGame {
     private LottoGame(){}
 

@@ -1,3 +1,5 @@
+package lotto;
+
 import org.junit.Test;
 
 public class LottoGameTest {
