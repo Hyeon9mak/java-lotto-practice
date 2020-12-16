@@ -1,15 +1,20 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class LottoRepository {
-    private final List<Lotto> lottos;
 
-    private LottoRepository(List<Lotto> lottos){
-        this.lottos = lottos;
+    private final List<Lotto> lottos = new ArrayList<>();
+
+    private LottoRepository() {
     }
 
-    public LottoRepository newLottoRepositoryWithLottos(List<Lotto> lottos){
-        return new LottoRepository(lottos);
+    public static LottoRepository newLottoRepository() {
+        return new LottoRepository();
+    }
+
+    public void addLotto(Lotto lotto){
+        lottos.add(lotto);
     }
 }

@@ -29,10 +29,10 @@ import java.util.List;
  * 로또 한장을 의미하는 객체
  */
 public class Lotto {
-    private final List<Integer> numbers;
+    private final List<Integer> lottoNumbers;
 
-    public Lotto(List<Integer> numbers) {
-        this.numbers = numbers;
+    public Lotto(List<Integer> lottoNumbers) {
+        this.lottoNumbers = lottoNumbers;
     }
 
     // 추가 기능 구현
@@ -40,7 +40,7 @@ public class Lotto {
 ```
 * 다음 Lotto 객체를 활용해 구현해야 한다. 
 * Lotto 기본 생성자를 추가할 수 없다. 
-* numbers 변수의 접근 제어자인 private을 변경할 수 없다. 
+* lottoNumbers 변수의 접근 제어자인 private을 변경할 수 없다. 
 * Lotto에 필드(인스턴스 변수)를 추가할 수 없다.
 
 ```java

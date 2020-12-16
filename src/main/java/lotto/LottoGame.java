@@ -1,12 +1,17 @@
 package lotto;
 
-public class LottoGame {
-    private LottoGame(){}
+import lotto.Service.LottoService;
 
-    public static LottoGame newLottoGame(){
+public class LottoGame {
+
+    private LottoGame() {
+    }
+
+    public static LottoGame newLottoGame() {
         return new LottoGame();
     }
 
     public void run() {
+        LottoService.buyLottos();
     }
 }
