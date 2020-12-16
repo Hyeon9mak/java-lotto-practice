@@ -2,8 +2,8 @@ package lotto.service;
 
 import java.util.ArrayList;
 import java.util.List;
-import lotto.View.UserInput;
-import lotto.View.View;
+import lotto.view.UserInput;
+import lotto.view.View;
 import lotto.domain.Lotto;
 import lotto.domain.LottoMoney;
 import lotto.domain.LottoRepository;
