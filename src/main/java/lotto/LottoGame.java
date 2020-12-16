@@ -1,7 +1,10 @@
 package lotto;
 
 import lotto.Service.LottoService;
+import lotto.View.UserInput;
+import lotto.domain.LottoMoney;
 import lotto.domain.LottoRepository;
+import lotto.domain.MatchedLottoRepository;
 import lotto.domain.WinningLotto;
 
 public class LottoGame {
@@ -14,8 +17,11 @@ public class LottoGame {
     }
 
     public void run() {
-        LottoRepository lottosOfUser = LottoService.buyLottosAmountUserPaid();
+        LottoMoney lottoMoney = LottoMoney.newMoneyWithInput(UserInput.getMoneyFromUser());
+        LottoRepository lottosOfUser = LottoService.buyLottosAmountUserPaid(lottoMoney);
         WinningLotto winningLotto = LottoService.makeWinningLotto();
-        LottoService.matchAllLottos(lottosOfUser, winningLotto);
+        MatchedLottoRepository matchedLottoRepositories = LottoService.matchAllLottos(lottosOfUser, winningLotto);
+        LottoService.printAllMatchResult(matchedLottoRepositories);
+        LottoService.printYield(matchedLottoRepositories, lottoMoney);
     }
 }

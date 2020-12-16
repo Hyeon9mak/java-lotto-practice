@@ -17,6 +17,10 @@ public class LottoMoney {
         return new LottoMoney(input);
     }
 
+    public int getMoney(){
+        return money;
+    }
+
     public int getCountBuyLotto(){
         return money / MINIMUM_LOTTO_BUY_MONEY;
     }

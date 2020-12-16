@@ -1,12 +1,16 @@
 package lotto.Service;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import lotto.View.UserInput;
 import lotto.View.View;
 import lotto.domain.Lotto;
 import lotto.domain.LottoMoney;
 import lotto.domain.LottoRepository;
+import lotto.domain.MatchedLottoRepository;
+import lotto.domain.Rank;
 import lotto.domain.WinningLotto;
 import lotto.utils.RandomUtils;
 
@@ -16,10 +20,8 @@ public class LottoService {
     private static final int MAXIMUM_LOTTO_NUMBER = 45;
     private static final int DEFAULT_LOTTO_NUMBERS_SIZE = 6;
     private static final String COMMA = ",";
-
-    public static LottoRepository buyLottosAmountUserPaid() {
+    public static LottoRepository buyLottosAmountUserPaid(LottoMoney lottoMoney) {
         LottoRepository lottoRepository = LottoRepository.newLottoRepository();
-        LottoMoney lottoMoney = LottoMoney.newMoneyWithInput(UserInput.getMoneyFromUser());
         int buyCount = lottoMoney.getCountBuyLotto();
         View.printCountBuyLotto(buyCount);
         for (int i = 0; i < buyCount; i++) {
@@ -67,7 +69,39 @@ public class LottoService {
         return setLottoNumbers;
     }
 
-    public static void matchAllLottos(LottoRepository lottosOfUser, WinningLotto winningLotto) {
+    public static MatchedLottoRepository matchAllLottos(LottoRepository lottosOfUser,
+        WinningLotto winningLotto) {
+        MatchedLottoRepository matchedLottos = MatchedLottoRepository.newMatchedLottoRepository();
+        lottosOfUser.lottos().stream().forEach(lotto -> {
+            matchedLottos.addMatchedLotto(winningLotto.match(lotto));
+        });
+        return matchedLottos;
+    }
 
+    public static void printAllMatchResult(MatchedLottoRepository matchedLottos) {
+        matchedLottos.getRankTable().forEach((rank, integer) -> {
+            printMatchResult(rank, integer);
+        });
+    }
+
+    private static void printMatchResult(Rank rank, Integer integer) {
+        if (rank == Rank.SECOND) {
+            View.printMatchResultBonus(rank.getCountOfMatch(), rank.getWinningMoney(), integer);
+            return;
+        }
+        View.printMatchResult(rank.getCountOfMatch(), rank.getWinningMoney(), integer);
+    }
+
+    public static void printYield(MatchedLottoRepository matchedLottoRepositories,
+        LottoMoney lottoMoney) {
+        List<Integer> yield = new ArrayList<>();
+        matchedLottoRepositories.getRankTable().forEach((rank, integer) -> {
+            yield.add(integer * rank.getWinningMoney());
+        });
+        float totalYield = 0;
+        for (Integer y : yield) {
+            totalYield += y;
+        }
+        View.printYield(totalYield / lottoMoney.getMoney());
     }
 }
