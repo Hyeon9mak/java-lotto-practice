@@ -1,6 +1,8 @@
 package lotto;
 
 import lotto.Service.LottoService;
+import lotto.domain.LottoRepository;
+import lotto.domain.WinningLotto;
 
 public class LottoGame {
 
@@ -12,6 +14,8 @@ public class LottoGame {
     }
 
     public void run() {
-        LottoService.buyLottos();
+        LottoRepository lottosOfUser = LottoService.buyLottosAmountUserPaid();
+        WinningLotto winningLotto = LottoService.makeWinningLotto();
+        LottoService.matchAllLottos(lottosOfUser, winningLotto);
     }
 }

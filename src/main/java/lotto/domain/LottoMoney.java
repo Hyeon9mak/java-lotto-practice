@@ -1,19 +1,20 @@
 package lotto.domain;
 
-public class Money {
+public class LottoMoney {
 
     private static final int MINIMUM_LOTTO_BUY_MONEY = 1_000;
 
     private final int money;
 
-    private Money(String input) {
+    private LottoMoney(String input) {
         int money = validateMoneyInteger(input);
         validateMoneyOverThousand(money);
+        validateMoneyDivisonThousand(money);
         this.money = money;
     }
 
-    public static Money newMoneyWithInput(String input) {
-        return new Money(input);
+    public static LottoMoney newMoneyWithInput(String input) {
+        return new LottoMoney(input);
     }
 
     public int getCountBuyLotto(){
@@ -34,4 +35,9 @@ public class Money {
         }
     }
 
+    private void validateMoneyDivisonThousand(int money) {
+        if (money % MINIMUM_LOTTO_BUY_MONEY != 0){
+            throw new IllegalArgumentException("로또는 " + MINIMUM_LOTTO_BUY_MONEY + "원 단위로만 구매할 수 있습니다.");
+        }
+    }
 }

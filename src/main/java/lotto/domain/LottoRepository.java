@@ -14,7 +14,11 @@ public class LottoRepository {
         return new LottoRepository();
     }
 
-    public void addLotto(Lotto lotto){
+    public List<Lotto> lottos() {
+        return lottos;
+    }
+
+    public void addLotto(Lotto lotto) {
         lottos.add(lotto);
     }
 }
